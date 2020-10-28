@@ -15,7 +15,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nessei-workspace/nessei-ui": ["libs/nessei-ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
