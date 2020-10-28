@@ -1968,6 +1968,11 @@
     yargs "15.4.1"
     yargs-parser "20.0.0"
 
+"@nx-go/nx-go@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@nx-go/nx-go/-/nx-go-1.2.3.tgz#f887e99c59b7b76a0c06b0c3cdb24cfba97d3cb2"
+  integrity sha512-+BlF7bD/LWd5172XBFo2s02ibmrRkfHWQkK96R4x0im8MXipUZroEPXeG+rFAXs7h7NSsCe1SMQmIlRIBW1DiA==
+
 "@rollup/plugin-babel@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.0.2.tgz#d9351b9545b0c586a193fc99830d4b1a25317ed5"

@@ -97,6 +97,35 @@
           }
         }
       }
+    },
+    "nessei-api": {
+      "projectType": "application",
+      "root": "apps/nessei-api",
+      "sourceRoot": "apps/nessei-api/src",
+      "architect": {
+        "build": {
+          "builder": "@nx-go/nx-go:build",
+          "options": {
+            "outputPath": "dist/apps/nessei-api",
+            "main": "apps/nessei-api/src/main.go"
+          }
+        },
+        "serve": {
+          "builder": "@nx-go/nx-go:serve",
+          "options": {
+            "main": "apps/nessei-api/src/main.go"
+          }
+        },
+        "test": {
+          "builder": "@nx-go/nx-go:test",
+          "options": {
+            "main": "apps/nessei-api/src/main_test.go"
+          }
+        },
+        "lint": {
+          "builder": "@nx-go/nx-go:lint"
+        }
+      }
     }
   },
   "cli": {
