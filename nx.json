@@ -1,50 +1,30 @@
 {
-  "npmScope": "nessei-workspace",
-  "affected": {
-    "defaultBase": "main"
-  },
   "implicitDependencies": {
-    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
+    ".eslintrc.json": "*"
   },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "catholicviet-jp",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "accessToken": "YmJhZmNiMDItMDBhMi00NGIwLTg3YTktMTA3YWU4NGIyY2RkfHJlYWQtd3JpdGU=",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint",
-          "e2e"
-        ],
-        "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
   },
   "projects": {
-    "nessei-next": {
+    "frontend": {
       "tags": []
     },
-    "nessei-next-e2e": {
+    "frontend-e2e": {
       "tags": [],
-      "implicitDependencies": [
-        "nessei-next"
-      ]
-    },
-    "nessei-ui": {
-      "tags": []
-    },
-    "nessei-api": {
-      "tags": []
+      "implicitDependencies": ["frontend"]
     }
   }
 }

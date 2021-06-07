@@ -1,148 +1,129 @@
 {
-  "version": 1,
-  "projects": {
-    "nessei-next": {
-      "root": "apps/nessei-next",
-      "sourceRoot": "apps/nessei-next",
-      "projectType": "application",
-      "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/next:build",
-          "options": {
-            "root": "apps/nessei-next",
-            "outputPath": "dist/apps/nessei-next"
-          },
-          "configurations": {
-            "production": {}
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/next:server",
-          "options": {
-            "buildTarget": "nessei-next:build",
-            "dev": true
-          },
-          "configurations": {
-            "production": {
-              "buildTarget": "nessei-next:build:production",
-              "dev": false
-            }
-          }
-        },
-        "export": {
-          "builder": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "nessei-next:build:production"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/nessei-next/**/*.{ts,tsx}"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "apps/nessei-next/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "nessei-next-e2e": {
-      "root": "apps/nessei-next-e2e",
-      "sourceRoot": "apps/nessei-next-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/nessei-next-e2e/cypress.json",
-            "tsConfig": "apps/nessei-next-e2e/tsconfig.e2e.json",
-            "devServerTarget": "nessei-next:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "nessei-next:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/nessei-next-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "nessei-ui": {
-      "root": "libs/nessei-ui",
-      "sourceRoot": "libs/nessei-ui/src",
-      "projectType": "library",
-      "schematics": {},
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/nessei-ui/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/nessei-ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "nessei-api": {
-      "projectType": "application",
-      "root": "apps/nessei-api",
-      "sourceRoot": "apps/nessei-api/src",
-      "architect": {
-        "build": {
-          "builder": "@nx-go/nx-go:build",
-          "options": {
-            "outputPath": "dist/apps/nessei-api",
-            "main": "apps/nessei-api/src/main.go"
-          }
-        },
-        "serve": {
-          "builder": "@nx-go/nx-go:serve",
-          "options": {
-            "main": "apps/nessei-api/src/main.go"
-          }
-        },
-        "test": {
-          "builder": "@nx-go/nx-go:test",
-          "options": {
-            "main": "apps/nessei-api/src/main_test.go"
-          }
-        },
-        "lint": {
-          "builder": "@nx-go/nx-go:lint"
-        }
-      }
-    }
-  },
+  "version": 2,
   "cli": {
-    "defaultCollection": "@nrwl/next"
+    "defaultCollection": "@nrwl/react"
   },
-  "schematics": {
+  "defaultProject": "frontend",
+  "generators": {
     "@nrwl/react": {
       "application": {
+        "style": "css",
+        "linter": "eslint",
+        "strict": true,
         "babel": true
-      }
-    },
-    "@nrwl/next": {
-      "application": {
-        "style": "styled-components",
-        "linter": "eslint"
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint",
+        "strict": true
       }
     }
   },
-  "defaultProject": "nessei-next"
+  "projects": {
+    "frontend": {
+      "root": "apps/frontend",
+      "sourceRoot": "apps/frontend/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/frontend",
+            "index": "apps/frontend/src/index.html",
+            "main": "apps/frontend/src/main.tsx",
+            "polyfills": "apps/frontend/src/polyfills.ts",
+            "tsConfig": "apps/frontend/tsconfig.app.json",
+            "assets": [
+              "apps/frontend/src/favicon.ico",
+              "apps/frontend/src/assets"
+            ],
+            "styles": ["apps/frontend/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/frontend/src/environments/environment.ts",
+                  "with": "apps/frontend/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "frontend:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "frontend:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/frontend/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/frontend"],
+          "options": {
+            "jestConfig": "apps/frontend/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "frontend-e2e": {
+      "root": "apps/frontend-e2e",
+      "sourceRoot": "apps/frontend-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/frontend-e2e/cypress.json",
+            "tsConfig": "apps/frontend-e2e/tsconfig.e2e.json",
+            "devServerTarget": "frontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "frontend:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/frontend-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
 }
