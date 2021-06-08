@@ -25,6 +25,13 @@
     "frontend-e2e": {
       "tags": [],
       "implicitDependencies": ["frontend"]
+    },
+    "nx-python": {
+      "tags": []
+    },
+    "nx-python-e2e": {
+      "tags": [],
+      "implicitDependencies": ["nx-python"]
     }
   }
 }

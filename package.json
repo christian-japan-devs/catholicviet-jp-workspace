@@ -41,9 +41,12 @@
     "@babel/preset-typescript": "7.12.13",
     "@nrwl/cli": "12.3.6",
     "@nrwl/cypress": "12.3.6",
+    "@nrwl/devkit": "12.3.6",
     "@nrwl/eslint-plugin-nx": "12.3.6",
     "@nrwl/jest": "12.3.6",
     "@nrwl/linter": "12.3.6",
+    "@nrwl/node": "12.3.6",
+    "@nrwl/nx-plugin": "12.3.6",
     "@nrwl/react": "12.3.6",
     "@nrwl/tao": "12.3.6",
     "@nrwl/web": "12.3.6",
@@ -69,6 +72,7 @@
     "prettier": "2.2.1",
     "ts-jest": "26.5.5",
     "ts-node": "~9.1.1",
+    "tslib": "^2.0.0",
     "typescript": "~4.2.4"
   }
 }
