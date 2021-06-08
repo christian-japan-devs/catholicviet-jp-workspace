@@ -10,7 +10,7 @@ describe('nx-python e2e', () => {
     const plugin = uniq('nx-python');
     ensureNxProject('@catholicviet-jp/nx-python', 'dist/libs/nx-python');
     await runNxCommandAsync(
-      `generate @catholicviet-jp/nx-python:nx-python ${plugin}`
+      `generate @catholicviet-jp/nx-python:app ${plugin}`
     );
 
     const result = await runNxCommandAsync(`build ${plugin}`);

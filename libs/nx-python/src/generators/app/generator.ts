@@ -8,19 +8,16 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import * as path from 'path';
-import { NxPythonGeneratorSchema } from './schema';
+import { AppGeneratorSchema } from './schema';
 
-interface NormalizedSchema extends NxPythonGeneratorSchema {
+interface NormalizedSchema extends AppGeneratorSchema {
   projectName: string;
   projectRoot: string;
   projectDirectory: string;
-  parsedTags: string[];
+  parsedTags: string[]
 }
 
-function normalizeOptions(
-  host: Tree,
-  options: NxPythonGeneratorSchema
-): NormalizedSchema {
+function normalizeOptions(host: Tree, options: AppGeneratorSchema): NormalizedSchema {
   const name = names(options.name).fileName;
   const projectDirectory = options.directory
     ? `${names(options.directory).fileName}/${name}`
@@ -41,33 +38,32 @@ function normalizeOptions(
 }
 
 function addFiles(host: Tree, options: NormalizedSchema) {
-  const templateOptions = {
-    ...options,
-    ...names(options.name),
-    offsetFromRoot: offsetFromRoot(options.projectRoot),
-    template: '',
-  };
-  generateFiles(
-    host,
-    path.join(__dirname, 'files'),
-    options.projectRoot,
-    templateOptions
-  );
+    const templateOptions = {
+      ...options,
+      ...names(options.name),
+      offsetFromRoot: offsetFromRoot(options.projectRoot),
+      template: ''
+    };
+    generateFiles(host, path.join(__dirname, 'files'), options.projectRoot, templateOptions);
 }
 
-export default async function (host: Tree, options: NxPythonGeneratorSchema) {
+export default async function (host: Tree, options: AppGeneratorSchema) {
   const normalizedOptions = normalizeOptions(host, options);
-  addProjectConfiguration(host, normalizedOptions.projectName, {
-    root: normalizedOptions.projectRoot,
-    projectType: 'library',
-    sourceRoot: `${normalizedOptions.projectRoot}/src`,
-    targets: {
-      build: {
-        executor: '@catholicviet-jp/nx-python:build',
+  addProjectConfiguration(
+    host,
+    normalizedOptions.projectName,
+    {
+      root: normalizedOptions.projectRoot,
+      projectType: 'library',
+      sourceRoot: `${normalizedOptions.projectRoot}/src`,
+      targets: {
+        build: {
+          executor: "@catholicviet-jp/nx-python:build",
+        },
       },
-    },
-    tags: normalizedOptions.parsedTags,
-  });
+      tags: normalizedOptions.parsedTags,
+    }
+  );
   addFiles(host, normalizedOptions);
   await formatFiles(host);
 }

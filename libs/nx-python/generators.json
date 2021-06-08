@@ -3,10 +3,10 @@
   "name": "nx-python",
   "version": "0.0.1",
   "generators": {
-    "nx-python": {
-      "factory": "./src/generators/nx-python/generator",
-      "schema": "./src/generators/nx-python/schema.json",
-      "description": "nx-python generator"
+    "app": {
+      "factory": "./src/generators/app/generator",
+      "schema": "./src/generators/app/schema.json",
+      "description": "Python app generator"
     }
   }
 }
