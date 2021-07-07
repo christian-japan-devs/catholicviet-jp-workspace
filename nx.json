@@ -1,49 +1,39 @@
 {
-  "npmScope": "nessei-workspace",
-  "affected": {
-    "defaultBase": "main"
-  },
   "implicitDependencies": {
-    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    "tsconfig.base.json": "*",
-    "tslint.json": "*",
-    ".eslintrc.json": "*",
-    "nx.json": "*"
+    ".eslintrc.json": "*"
   },
+  "affected": {
+    "defaultBase": "main"
+  },
+  "npmScope": "catholicviet-jp",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "accessToken": "YmJhZmNiMDItMDBhMi00NGIwLTg3YTktMTA3YWU4NGIyY2RkfHJlYWQtd3JpdGU=",
         "cacheableOperations": [
           "build",
-          "test",
           "lint",
+          "test",
           "e2e"
-        ],
-        "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        ]
       }
     }
   },
   "projects": {
-    "nessei-next": {
+    "frontend": {
       "tags": []
     },
-    "nessei-next-e2e": {
+    "frontend-e2e": {
       "tags": [],
       "implicitDependencies": [
-        "nessei-next"
+        "frontend"
       ]
     },
-    "nessei-ui": {
-      "tags": []
-    },
-    "nessei-api": {
+    "backend": {
       "tags": []
     }
   }
