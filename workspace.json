@@ -135,78 +135,38 @@
         }
       }
     },
-    "nx-python": {
-      "root": "libs/nx-python",
-      "sourceRoot": "libs/nx-python/src",
-      "projectType": "library",
+    "backend": {
+      "projectType": "application",
+      "root": "apps/backend",
+      "sourceRoot": "apps/backend/src",
       "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
+        "build": {
+          "executor": "nx-python:build",
           "options": {
-            "lintFilePatterns": [
-              "libs/nx-python/**/*.ts"
-            ]
+            "outputPath": "dist/apps/backend",
+            "main": "apps/backend/manage.py",
+            "templateType": "django"
+          }
+        },
+        "serve": {
+          "executor": "nx-python:serve",
+          "options": {
+            "main": "apps/backend/manage.py",
+            "templateType": "django"
           }
         },
         "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/nx-python"
-          ],
+          "executor": "nx-python:test",
           "options": {
-            "jestConfig": "libs/nx-python/jest.config.js",
-            "passWithNoTests": true
+            "main": "apps/backend/src/test_hello.py",
+            "templateType": "django"
           }
         },
-        "build": {
-          "executor": "@nrwl/node:package",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+        "lint": {
+          "executor": "nx-python:lint",
           "options": {
-            "outputPath": "dist/libs/nx-python",
-            "tsConfig": "libs/nx-python/tsconfig.lib.json",
-            "packageJson": "libs/nx-python/package.json",
-            "main": "libs/nx-python/src/index.ts",
-            "assets": [
-              "libs/nx-python/*.md",
-              {
-                "input": "./libs/nx-python/src",
-                "glob": "**/!(*.ts)",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/nx-python/src",
-                "glob": "**/*.d.ts",
-                "output": "./src"
-              },
-              {
-                "input": "./libs/nx-python",
-                "glob": "generators.json",
-                "output": "."
-              },
-              {
-                "input": "./libs/nx-python",
-                "glob": "executors.json",
-                "output": "."
-              }
-            ]
-          }
-        }
-      }
-    },
-    "nx-python-e2e": {
-      "projectType": "application",
-      "root": "apps/nx-python-e2e",
-      "sourceRoot": "apps/nx-python-e2e/src",
-      "targets": {
-        "e2e": {
-          "executor": "@nrwl/nx-plugin:e2e",
-          "options": {
-            "target": "nx-python:build",
-            "npmPackageName": "@catholicviet-jp/nx-python",
-            "pluginOutputPath": "dist/libs/nx-python",
-            "jestConfig": "apps/nx-python-e2e/jest.config.js"
+            "main": "apps/backend/manage.py",
+            "templateType": "django"
           }
         }
       }
